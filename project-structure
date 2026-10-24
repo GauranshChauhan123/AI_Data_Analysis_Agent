@@ -1,0 +1,55 @@
+autonomous-data-analyst/
+
+agent/
+
+LangGraph workflow and decision-making logic.
+
+graph.py · state.py · prompts.py
+
+
+tools/
+
+Functions the agent can call to perform real operations.
+
+data_tools.py · chart_tools.py · report_tools.py
+
+
+data/
+
+Sample datasets and temporary uploaded files.
+
+
+services/
+
+Dataset loading, validation, and report-related business logic.
+
+
+memory/
+
+Conversation persistence and retrieval utilities, added later.
+
+
+tests/
+
+Tests for tools, calculations, and agent decisions.
+
+
+
+app.py
+
+Streamlit entry point — user uploads data and asks questions.
+
+
+.env
+
+API keys and local configuration. Never commit secrets to GitHub.
+
+
+requirements.txt
+
+Python dependency list for installation and deployment.
+
+
+.gitignore
+
+Excludes virtual environments, secrets, caches, and generated files.
