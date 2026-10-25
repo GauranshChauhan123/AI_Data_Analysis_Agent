@@ -95,10 +95,15 @@ def summary_node(state: MessageState) -> dict:
                 "error": str(e)
             }
 
+    needs_clarification = state.get("needs_clarification", False)
+    clarification_question = state.get("clarification_question", "")
+
     # Structured dictionary for dashboard UIs (Streamlit, React, Gradio, etc.)
     summary_data = {
         "final_file_path": os.path.abspath(final_file) if final_file else "",
         "is_modified": len(modifications) > 0,
+        "needs_clarification": needs_clarification,
+        "clarification_question": clarification_question,
         "dataset_overview": dataset_overview,
         "modifications": modifications,
         "charts": charts,
@@ -107,6 +112,17 @@ def summary_node(state: MessageState) -> dict:
         "errors": errors,
         "total_steps_executed": len(state.get("plan", []))
     }
+
+    # If clarification is needed, output the question directly to the user
+    if needs_clarification and clarification_question:
+        summary_message = f"### Clarification Needed\n\n{clarification_question}"
+        return {
+            "summary": summary_data,
+            "output_path": os.path.abspath(final_file) if final_file else "",
+            "clarification_question": clarification_question,
+            "needs_clarification": True,
+            "messages": [AIMessage(content=summary_message)]
+        }
 
     # Generate a human-readable markdown message for the user/chat interface
     md_lines = ["### 📊 Workflow Execution Summary\n"]
@@ -119,6 +135,7 @@ def summary_node(state: MessageState) -> dict:
                 f"- **Remaining Missing Values:** {dataset_overview['total_missing']}"
             )
         md_lines.append("")
+
 
     if modifications:
         md_lines.append("**Applied Modifications:**")

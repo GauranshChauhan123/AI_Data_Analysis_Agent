@@ -2,6 +2,7 @@
 import os
 import pandas as pd
 import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 from langchain_core.tools import tool
@@ -16,11 +17,8 @@ def _save_or_show(output_path=None):
         if output_path:
             os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
             plt.savefig(output_path, bbox_inches="tight")
-
-        if matplotlib.get_backend().lower() not in ["agg", "template"]:
-            plt.show()
     finally:
-        plt.close()
+        plt.close("all")
 
 
 def _plot(df, chart_type, x_col, y_col, hue_col, bins, title):

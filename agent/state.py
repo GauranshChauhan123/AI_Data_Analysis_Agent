@@ -17,5 +17,8 @@ class MessageState(TypedDict):
 
     output_path: str
     errors: list[str]
+    needs_clarification: bool
+    clarification_question: str
 
     summary: dict
+

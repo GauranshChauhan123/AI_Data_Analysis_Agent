@@ -145,6 +145,7 @@ def modify_dataset(
                 "error": f"Unsupported operation: {operation}"
             }
 
+        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
         df.to_csv(output_path, index=False)
 
         return {

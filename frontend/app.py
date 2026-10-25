@@ -16,11 +16,11 @@ st.write("Welcome! Explore and analyze your data in one place.")
 if "file_id" in st.session_state:
     st.success("Your dataset is ready.")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.markdown("### 🔎 Data Preview")
-        st.write("Explore rows and column types.")
+        st.write("Explore raw & edited rows and column types.")
 
     with col2:
         st.markdown("### 📈 Dataset Summary")
@@ -28,7 +28,11 @@ if "file_id" in st.session_state:
 
     with col3:
         st.markdown("### 🤖 AI Analysis")
-        st.write("Run analysis and generate reports.")
+        st.write("Run agent analysis, modify data & create charts.")
+
+    with col4:
+        st.markdown("### 📁 Artifacts & Exports")
+        st.write("View & download charts, edited CSVs & reports.")
 else:
     st.info("Upload a CSV using the sidebar to begin.")
 

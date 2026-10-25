@@ -82,6 +82,7 @@ def generate_report(file_path: str, output_path: str) -> dict:
 
         report = _build_report(df, file_path)
 
+        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as file:
             file.write(report)
 
